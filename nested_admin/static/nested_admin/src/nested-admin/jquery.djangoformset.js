@@ -53,7 +53,7 @@ class DjangoFormset {
         var totalForms = this.mgmtVal('TOTAL_FORMS');
         var maxForms = this.mgmtVal('MAX_NUM_FORMS');
         if (maxForms <= totalForms) {
-            this.$inline.find(this.opts.addButtonSelector).parents('.djn-add-item').hide();
+            this.$inline.find(this.opts.addButtonSelector + ':not(".inline-group .inline-group *")').parents('.djn-add-item').hide();
         }
         for (var i = 0; i < totalForms; i++) {
             this._initializeForm('#' + this.prefix + '-' + i);
@@ -249,7 +249,7 @@ class DjangoFormset {
         $form.insertBefore(this._$template);
 
         this.mgmtVal('TOTAL_FORMS', index + 1);
-        if ((maxForms - (index + 1)) <= 0) {
+        if ((maxForms - (index + 1)) < 0) {
             this.$inline.find(this.opts.addButtonSelector).parents('.djn-add-item').hide();
         }
 
